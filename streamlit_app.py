@@ -11,48 +11,19 @@ from datetime import datetime
 # ✅ Set page config
 st.set_page_config(page_title="Perth Power Consumption Predictor", layout="centered")
 
-# ✅ Theme toggle FIRST
-theme = st.sidebar.radio("\U0001F319 Choose Theme", ["Light", "Dark"])
-
-# ✅ Custom Styling (depends on selected theme)
-if theme == "Light":
-    st.markdown("""
-    <style>
-        .main { background-color: #f9fcff; font-family: 'Segoe UI'; padding: 1rem; }
-        h1, h2, h3, .stMarkdown h3 { color: #1a66ff; }
-        .stButton>button { background-color: #1a66ff; color: white; border-radius: 10px; }
-        .stDownloadButton > button { background-color: #33a673; color: white; border-radius: 10px; }
-    </style>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-    <style>
-        html, body, .main, .block-container {
-            background-color: #1c1c1c !important;
-            color: #e0e0e0 !important;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        h1, h2, h3, .stMarkdown h3 {
-            color: #66b2ff !important;
-        }
-        .stButton>button {
-            background-color: #333 !important;
-            color: white !important;
-            border-radius: 10px;
-        }
-        .stDownloadButton > button {
-            background-color: #228b5d !important;
-            color: white !important;
-            border-radius: 10px;
-        }
-        .st-expander {
-            background-color: #2a2a2a !important;
-            color: #e0e0e0 !important;
-            border: 1px solid #444 !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-
+# ✅ Custom Styling (Light theme only)
+st.markdown("""
+<style>
+    html, body, .main, .block-container {
+        background-color: #f9fcff;
+        font-family: 'Segoe UI';
+        padding: 1rem;
+    }
+    h1, h2, h3, .stMarkdown h3 { color: #1a66ff; }
+    .stButton>button { background-color: #1a66ff; color: white; border-radius: 10px; }
+    .stDownloadButton > button { background-color: #33a673; color: white; border-radius: 10px; }
+</style>
+""", unsafe_allow_html=True)
 
 # ✅ Sidebar Inputs
 st.sidebar.header("Input Features")
@@ -140,7 +111,7 @@ if st.button("📅 Download prediction as CSV"):
     st.download_button("Download", output.to_csv(index=False), file_name="prediction.csv", mime="text/csv")
 
 # ✅ Prophet Forecasting
-st.markdown("## 🗕️ Forecast Energy Use for Future Dates")
+st.markdown("## Forecast Energy Use for Future Dates")
 
 @st.cache_data
 def load_time_series():
@@ -184,4 +155,3 @@ if st.checkbox("📋 Show Forecast Table"):
 st.markdown("---")
 st.markdown("🛠️ *Developed for the Curtin University Predictive Analytics Project – 2025*")
 st.caption("By SK Nethmi Ruwanthi – Powered with CatBoost, Prophet & Streamlit")
-
