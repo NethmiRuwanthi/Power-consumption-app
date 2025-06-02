@@ -44,20 +44,6 @@ def user_input_features():
     dayofweek = st.sidebar.slider('Day of Week (0=Mon)', 0, 6, 3)
     month = st.sidebar.slider('Month (1-12)', 1, 12, 6)
     is_weekend = st.sidebar.selectbox('Is Weekend?', [0, 1])
-    lag_1 = st.sidebar.number_input('Lag 1 (kWh)', 0.0, 5.0, 0.3)
-    lag_2 = st.sidebar.number_input('Lag 2 (kWh)', 0.0, 5.0, 0.3)
-    lag_48 = st.sidebar.number_input('Lag 48 (kWh)', 0.0, 5.0, 0.3)
-    roll_mean_6 = st.sidebar.number_input('Rolling Mean (6)', 0.0, 5.0, 0.3)
-    roll_std_6 = st.sidebar.number_input('Rolling Std (6)', 0.0, 2.0, 0.1)
-    roll_mean_12 = st.sidebar.number_input('Rolling Mean (12)', 0.0, 5.0, 0.3)
-    roll_std_12 = st.sidebar.number_input('Rolling Std (12)', 0.0, 2.0, 0.1)
-    roll_mean_48 = st.sidebar.number_input('Rolling Mean (48)', 0.0, 5.0, 0.3)
-    roll_std_48 = st.sidebar.number_input('Rolling Std (48)', 0.0, 2.0, 0.1)
-    is_daylight = st.sidebar.selectbox('Is Daylight?', [0, 1])
-    tariff_period = st.sidebar.slider('Tariff Period (0–3)', 0, 3, 1)
-    roll_mean_336 = st.sidebar.number_input('Rolling Mean (336)', 0.0, 5.0, 0.3)
-    THI = st.sidebar.number_input('Temperature Humidity Index (THI)', 0.0, 40.0, 20.0)
-    is_peak_hour = st.sidebar.selectbox('Is Peak Hour?', [0, 1])
     season = st.sidebar.selectbox('Season', ['Summer', 'Winter', 'Spring'])
     season_Summer = int(season == 'Summer')
     season_Winter = int(season == 'Winter')
@@ -74,20 +60,20 @@ def user_input_features():
         'dayofweek': dayofweek,
         'month': month,
         'is_weekend': is_weekend,
-        'lag_1': lag_1,
-        'lag_2': lag_2,
-        'lag_48': lag_48,
-        'roll_mean_6': roll_mean_6,
-        'roll_std_6': roll_std_6,
-        'roll_mean_12': roll_mean_12,
-        'roll_std_12': roll_std_12,
-        'roll_mean_48': roll_mean_48,
-        'roll_std_48': roll_std_48,
-        'is_daylight': is_daylight,
-        'tariff_period': tariff_period,
-        'roll_mean_336': roll_mean_336,
-        'THI': THI,
-        'is_peak_hour': is_peak_hour,
+        'lag_1': 0.3,
+        'lag_2': 0.3,
+        'lag_48': 0.3,
+        'roll_mean_6': 0.3,
+        'roll_std_6': 0.1,
+        'roll_mean_12': 0.3,
+        'roll_std_12': 0.1,
+        'roll_mean_48': 0.3,
+        'roll_std_48': 0.1,
+        'is_daylight': 1,
+        'tariff_period': 1,
+        'roll_mean_336': 0.3,
+        'THI': 20.0,
+        'is_peak_hour': 0,
         'season_Spring': season_Spring,
         'season_Summer': season_Summer,
         'season_Winter': season_Winter
