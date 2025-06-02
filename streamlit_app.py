@@ -111,6 +111,54 @@ if st.button("📥 Download prediction as CSV"):
     output["predicted_kWh"] = prediction
     st.download_button("Download", output.to_csv(index=False), file_name="prediction.csv", mime="text/csv")
 
+# Forecasting with Prophet
+from prophet import Prophet
+from prophet.plot import plot_plotly
+import plotly.graph_objs as go
+
+st.markdown("## 📅 Forecast Future Energy Consumption")
+
+# Load or simulate historical time series data
+@st.cache_data
+def load_time_series():
+    date_rng = pd.date_range(start='2024-01-01', periods=180, freq='D')
+    np.random.seed(42)
+    consumption = 0.6 + np.sin(np.linspace(0, 3 * np.pi, len(date_rng))) * 0.1 + np.random.normal(0, 0.05, len(date_rng))
+    return pd.DataFrame({'ds': date_rng, 'y': consumption})
+
+ts_data = load_time_series()
+
+# Train Prophet model
+m = Prophet()
+m.fit(ts_data)
+
+# User selects a future date
+st.subheader("🔮 Select a future date for forecast:")
+selected_date = st.date_input("Forecast Date", value=pd.to_datetime("2025-06-15"))
+
+# Forecast into the future
+future = m.make_future_dataframe(periods=60)
+forecast = m.predict(future)
+
+# Extract forecasted result for selected date
+selected_forecast = forecast[forecast['ds'] == pd.to_datetime(selected_date)]
+
+if not selected_forecast.empty:
+    yhat = selected_forecast['yhat'].values[0]
+    st.success(f"📆 Forecasted consumption on **{selected_date}**: **{yhat:.3f} kWh**")
+else:
+    st.warning("⚠️ Selected date is outside forecast range. Please select a closer date.")
+
+# Optional: Show forecast plot
+if st.checkbox("📊 Show Forecast Chart"):
+    fig = plot_plotly(m, forecast)
+    st.plotly_chart(fig)
+
+# Optional: Show full forecast table
+if st.checkbox("📄 Show Forecast Table"):
+    st.dataframe(forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(60))
+
+
 st.markdown("---")
 st.caption("Developed for ML-Based Power Consumption Modeling – Curtin University")
 
