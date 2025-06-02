@@ -19,8 +19,8 @@ st.markdown("""
 # Load model
 model = joblib.load("catboost_model.pkl")
 
-st.title("🔋 Perth Household Power Consumption Predictor by SK Nethmi Ruwanthi")
-st.markdown("Predict electricity consumption based on weather, time, and engineered features.")
+st.title("🔋 Perth Household Power Consumption Predictor")
+st.markdown("Predict electricity consumption based on weather, time, and engineered features by SK Nethmi Ruwanthi")
 
 # About section
 with st.expander("📘 About this App"):
