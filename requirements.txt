@@ -3,3 +3,6 @@ pandas
 numpy
 scikit-learn
 catboost
+matplotlib
+plotly
+shap
