@@ -120,7 +120,7 @@ input_df = input_df.reindex(columns=expected_cols, fill_value=0)
 prediction = model.predict(input_df)[0]
 
 # Show output
-st.subheader("📈 Predicted Energy Consumption")
+st.subheader("📈 Estimated Power Usage (kWh) based on your input")
 st.success(f"Estimated consumption: {prediction:.3f} kWh")
 
 # Show chart
