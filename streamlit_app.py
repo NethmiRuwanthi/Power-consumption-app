@@ -9,49 +9,61 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="Perth Power Consumption Predictor", layout="centered")
 
 # ✅ Custom Styling
-st.markdown("""
-<style>
-    .main {
-        background-color: #f9fcff;
-        font-family: 'Segoe UI', sans-serif;
-        padding: 1rem;
-    }
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-    h1, h2, h3, .stMarkdown h3 {
-        color: #1a66ff;
-    }
-    .stButton>button {
-        background-color: #1a66ff;
-        color: white;
-        border-radius: 10px;
-        padding: 0.5rem 1rem;
-        font-weight: bold;
-    }
-    .stButton>button:hover {
-        background-color: #0047b3;
-    }
-    .stCheckbox {
-        margin-bottom: 1rem;
-    }
-    .stDownloadButton > button {
-        background-color: #33a673;
-        color: white;
-        border-radius: 10px;
-        font-weight: bold;
-    }
-    .stDownloadButton > button:hover {
-        background-color: #228b5d;
-    }
-    .st-expander {
-        background-color: #eaf5ff;
-        border: 1px solid #cce4ff;
-        border-radius: 10px;
-    }
-</style>
-""", unsafe_allow_html=True)
+if theme == "Light":
+    st.markdown("""
+    <style>
+        .main {
+            background-color: #f9fcff;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 1rem;
+        }
+        h1, h2, h3, .stMarkdown h3 {
+            color: #1a66ff;
+        }
+        .stButton>button {
+            background-color: #1a66ff;
+            color: white;
+            border-radius: 10px;
+        }
+        .stDownloadButton > button {
+            background-color: #33a673;
+            color: white;
+            border-radius: 10px;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+else:  # Dark Theme
+    st.markdown("""
+    <style>
+        .main {
+            background-color: #1c1c1c;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .block-container {
+            background-color: #1c1c1c;
+        }
+        h1, h2, h3, .stMarkdown h3 {
+            color: #66b2ff;
+        }
+        .stButton>button {
+            background-color: #333;
+            color: white;
+            border-radius: 10px;
+        }
+        .stDownloadButton > button {
+            background-color: #228b5d;
+            color: white;
+            border-radius: 10px;
+        }
+        .st-expander {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
 
 
 
@@ -72,6 +84,8 @@ with st.expander("📘 About this App"):
 
 # Sidebar inputs
 st.sidebar.header("Input Features")
+theme = st.sidebar.radio("🌓 Choose Theme", ["Light", "Dark"])
+
 
 def user_input_features():
     generation_kWh = st.sidebar.slider('Solar Generation (kWh)', 0.0, 5.0, 0.0)
