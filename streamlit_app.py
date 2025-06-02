@@ -44,7 +44,6 @@ model = joblib.load("catboost_model.pkl")
 
 st.title("🔋 Perth Household Power Consumption Predictor")
 st.markdown("##### _Predict consumption using AI-powered insights – by SK Nethmi Ruwanthi_")
-st.markdown("---")
 
 
 # About section
