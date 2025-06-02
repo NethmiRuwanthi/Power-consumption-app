@@ -136,9 +136,19 @@ m.fit(ts_data)
 st.subheader("🔮 Select a future date for forecast:")
 selected_date = st.date_input("Forecast Date", value=pd.to_datetime("2025-06-15"))
 
-# Forecast into the future
-future = m.make_future_dataframe(periods=60)
+from datetime import datetime
+
+# Calculate how many days into the future the selected date is
+last_date = ts_data['ds'].max().date()  # Last date in training data
+selected_date_dt = pd.to_datetime(selected_date).date()
+
+days_ahead = (selected_date_dt - last_date).days
+forecast_horizon = max(60, days_ahead + 1)  # Minimum 60 days, or just enough to cover
+
+# Generate future DataFrame dynamically
+future = m.make_future_dataframe(periods=forecast_horizon)
 forecast = m.predict(future)
+
 
 # Extract forecasted result for selected date
 selected_forecast = forecast[forecast['ds'] == pd.to_datetime(selected_date)]
