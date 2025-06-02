@@ -43,7 +43,9 @@ st.markdown("""
 model = joblib.load("catboost_model.pkl")
 
 st.title("🔋 Perth Household Power Consumption Predictor")
-st.markdown("Predict electricity consumption based on weather, time, and engineered features by SK Nethmi Ruwanthi")
+st.markdown("##### _Predict consumption using AI-powered insights – by SK Nethmi Ruwanthi_")
+st.markdown("---")
+
 
 # About section
 with st.expander("📘 About this App"):
@@ -193,5 +195,6 @@ if st.checkbox("📄 Show Forecast Table"):
 
 
 st.markdown("---")
-st.caption("Developed for ML-Based Power Consumption Modeling – SK Nethmi Ruwanthi - Curtin University")
+st.markdown("🛠️ *Developed for the Curtin University Predictive Analytics Project – 2025*")
+st.caption("By SK Nethmi Ruwanthi – Powered with CatBoost, Prophet & Streamlit")
 
