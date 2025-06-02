@@ -11,10 +11,33 @@ st.set_page_config(page_title="Perth Power Consumption Predictor", layout="cente
 # ✅ Custom Styling
 st.markdown("""
 <style>
-    .css-1d391kg {color: #1a66ff;}
-    .css-18e3th9 {background-color: #f5faff;}
+    .main {
+        background-color: #f9fcff;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 1rem;
+    }
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    h1, h2, h3, .stMarkdown h3 {
+        color: #1a66ff;
+    }
+    .stButton>button {
+        background-color: #1a66ff;
+        color: white;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+    }
+    .stButton>button:hover {
+        background-color: #0047b3;
+    }
+    .stCheckbox {
+        margin-bottom: 1rem;
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 # Load model
 model = joblib.load("catboost_model.pkl")
@@ -170,5 +193,5 @@ if st.checkbox("📄 Show Forecast Table"):
 
 
 st.markdown("---")
-st.caption("Developed for ML-Based Power Consumption Modeling – Curtin University")
+st.caption("Developed for ML-Based Power Consumption Modeling – SK Nethmi Ruwanthi - Curtin University")
 
