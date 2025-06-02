@@ -26,8 +26,9 @@ st.markdown("""
     .stButton>button {
         background-color: #1a66ff;
         color: white;
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 0.5rem 1rem;
+        font-weight: bold;
     }
     .stButton>button:hover {
         background-color: #0047b3;
@@ -35,8 +36,23 @@ st.markdown("""
     .stCheckbox {
         margin-bottom: 1rem;
     }
+    .stDownloadButton > button {
+        background-color: #33a673;
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+    .stDownloadButton > button:hover {
+        background-color: #228b5d;
+    }
+    .st-expander {
+        background-color: #eaf5ff;
+        border: 1px solid #cce4ff;
+        border-radius: 10px;
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 
 # Load model
@@ -119,7 +135,8 @@ input_df = input_df.reindex(columns=expected_cols, fill_value=0)
 prediction = model.predict(input_df)[0]
 
 # Show output
-st.subheader("📈 Estimated Power Usage (kWh) based on your input")
+st.markdown("## 🔎 Estimate Energy Use Based on Your Inputs")
+st.markdown("Use the sidebar to enter current or hypothetical conditions. The model will predict your electricity usage.")
 st.success(f"Estimated consumption: {prediction:.3f} kWh")
 
 # Show chart
@@ -140,7 +157,8 @@ from prophet import Prophet
 from prophet.plot import plot_plotly
 import plotly.graph_objs as go
 
-st.markdown("## 📅 Forecast Future Energy Consumption")
+st.markdown("## 📅 Forecast Energy Use for Future Dates")
+st.markdown("Use the time-series model to forecast upcoming power usage based on historical trends.")
 
 # Load or simulate historical time series data
 @st.cache_data
@@ -183,14 +201,18 @@ if not selected_forecast.empty:
 else:
     st.warning("⚠️ Selected date is outside forecast range. Please select a closer date.")
 
-# Optional: Show forecast plot
 if st.checkbox("📊 Show Forecast Chart"):
+    st.markdown("### 📈 Daily Forecast Trend")
     fig = plot_plotly(m, forecast)
-    st.plotly_chart(fig)
+    fig.update_layout(xaxis_title="Date", yaxis_title="Predicted kWh", title="Energy Forecast (Prophet)")
+    st.plotly_chart(fig, use_container_width=True)
 
-# Optional: Show full forecast table
 if st.checkbox("📄 Show Forecast Table"):
-    st.dataframe(forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(60))
+    st.markdown("### 📋 Forecast Table (Next 60 Days)")
+    styled_table = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(60)
+    styled_table.columns = ['Date', 'Predicted kWh', 'Lower Bound', 'Upper Bound']
+    st.dataframe(styled_table.style.format({"Predicted kWh": "{:.2f}", "Lower Bound": "{:.2f}", "Upper Bound": "{:.2f}"}))
+
 
 
 st.markdown("---")
