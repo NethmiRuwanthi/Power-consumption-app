@@ -1,10 +1,11 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 
+# ✅ MUST come before any other Streamlit commands
+st.set_page_config(page_title="Perth Power Consumption Predictor", layout="centered")
 # Inject custom CSS for better UI
 st.markdown("""
 <style>
