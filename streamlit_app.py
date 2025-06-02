@@ -27,13 +27,32 @@ if theme == "Light":
 else:
     st.markdown("""
     <style>
-        .main { background-color: #1c1c1c; color: #e0e0e0; font-family: 'Segoe UI'; }
-        h1, h2, h3, .stMarkdown h3 { color: #66b2ff; }
-        .stButton>button { background-color: #333; color: white; border-radius: 10px; }
-        .stDownloadButton > button { background-color: #228b5d; color: white; border-radius: 10px; }
-        .st-expander { background-color: #2a2a2a; border: 1px solid #444; }
+        html, body, .main, .block-container {
+            background-color: #1c1c1c !important;
+            color: #e0e0e0 !important;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        h1, h2, h3, .stMarkdown h3 {
+            color: #66b2ff !important;
+        }
+        .stButton>button {
+            background-color: #333 !important;
+            color: white !important;
+            border-radius: 10px;
+        }
+        .stDownloadButton > button {
+            background-color: #228b5d !important;
+            color: white !important;
+            border-radius: 10px;
+        }
+        .st-expander {
+            background-color: #2a2a2a !important;
+            color: #e0e0e0 !important;
+            border: 1px solid #444 !important;
+        }
     </style>
     """, unsafe_allow_html=True)
+
 
 # ✅ Sidebar Inputs
 st.sidebar.header("Input Features")
